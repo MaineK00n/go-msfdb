@@ -18,19 +18,19 @@ type Metasploit struct {
 	Title       string
 	Description string
 	CveID       string
-	Edbs        []Edb       `json:",omitempty" gorm:"many2many:msf_edbs;"`
-	References  []Reference `json:",omitempty" gorm:"many2many:msf_refs;"`
+	Edbs        []Edb       `gorm:"many2many:msf_edbs;"`
+	References  []Reference `gorm:"many2many:msf_refs;"`
 }
 
 // Edb has Exploit-ID
 type Edb struct {
-	ID              uint `json:",omitempty"`
+	ID              uint `json:"-"`
 	ExploitUniqueID string
 }
 
 // Reference is Child model of Metasploit
 // It holds reference information about the CVE
 type Reference struct {
-	ID   uint   `json:",omitempty"`
+	ID   uint   `json:"-"`
 	Link string `sql:"type:text"`
 }
